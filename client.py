@@ -17,4 +17,15 @@ class Client:
             headers=self.headers,
             json=json
         )
+        log = f"""
+REQUEST:
+    URL: {response.request.url}
+    METHOD: {response.request.method}
+    JSON:   {response.request.body}
+    
+RESPONSE:    
+    STATUS_CODE: {response.status_code}
+    CONTENT: {response.content}
+"""
+        print(log)
         return response

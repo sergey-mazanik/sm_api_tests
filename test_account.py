@@ -1,7 +1,5 @@
 import pytest
-import requests
 import faker
-from pprint import pprint
 from client import Client
 
 
@@ -18,19 +16,6 @@ def generate_user():
         "email": fake.email(),
         "password": fake.password(length=10)
     }
-
-
-# @pytest.fixture()
-# def set_url():
-#     return "http://5.63.153.31:5051/v1/account"
-#
-#
-# @pytest.fixture()
-# def headers():
-#     return {
-#         'accept': '*/*',
-#         'Content-Type': 'application/json'
-#     }
 
 
 data = [
@@ -57,8 +42,6 @@ data = [
 
 @pytest.mark.parametrize('data', data)
 def test_post_v1_account(data, client):
-    pprint(data)
     response = client.register_user(data)
-    print()
-    print(response.status_code)
-    print(response.text)
+    assert response.status_code == 400, 'Status code should be 400!'
+    # assert response.status_code == 200, 'Status code should be 200!'
